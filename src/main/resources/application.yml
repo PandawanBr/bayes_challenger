@@ -1,0 +1,40 @@
+server:
+  error.whitelabel.enabled: false
+  port: ${SERVER_PORT:8080}
+
+spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    open-in-view: false
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        enable_lazy_load_no_trans: true
+        temp:
+          use_jdbc_metadata_defaults: false
+        generate_statistics: true
+      javax:
+        persistence:
+          query:
+            timeout: 10000
+  datasource:
+    driverClassName: org.h2.Driver
+    url: jdbc:h2:mem:dota
+    username: sa
+    password: password
+  banner:
+    image:
+      location: classpath:banner.png
+      width: 100
+      height: 15
+      margin: 1
+  h2:
+    console:
+      enabled: true
+
+logging:
+  config: classpath:logback-${ENV:development}.xml
